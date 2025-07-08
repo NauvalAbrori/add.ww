@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Login & Register UKM BDK</title>
+  <style>
+    body {
+      background-image: url('logo_bdk_2.png');
+      background-size: 50%;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: #000;
+      font-family: Arial, sans-serif;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background-color: rgba(43, 0, 87, 0.85);
+      padding: 15px;
+      border-radius: 10px;
+      width: 200px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    h2 {
+      text-align: center;
+      color: #00bcd4;
+    }
+    .input-group {
+      position: relative;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+    .toggle-password {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 14px;
+      color: #ccc;
+      user-select: none;
+    }
+    button {
+      background-color: #00bcd4;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container" id="login-form">
+  <h2>Login UKM BDK</h2>
+  <form onsubmit="return handleLogin()">
+    <input type="text" name="username" placeholder="Username" required>
+    <div class="input-group">
+      <input type="password" name="password" placeholder="Password" id="login-password" required>
+      <span class="toggle-password" onclick="togglePassword('login-password', this)">👁️</span>
+    </div>
+    <button type="submit">Masuk</button>
+    <button type="button" onclick="showRegister()">Daftar</button>
+  </form>
+</div>
+
+<div class="container hidden" id="register-form">
+  <h2>Daftar Akun</h2>
+  <form onsubmit="return handleRegister()">
+    <input type="text" name="username" placeholder="Username" required>
+    <input type="email" name="email" placeholder="Email" required>
+    
+    <div class="input-group">
+      <input type="password" name="password" placeholder="Password" id="register-password" required>
+      <span class="toggle-password" onclick="togglePassword('register-password', this)">👁️</span>
+    </div>
+    
+    <div class="input-group">
+      <input type="password" name="confirmPassword" placeholder="Konfirmasi Password" id="register-confirm-password" required>
+      <span class="toggle-password" onclick="togglePassword('register-confirm-password', this)">👁️</span>
+    </div>
+    
+    <button type="submit">Daftar</button>
+    <button type="button" onclick="showLogin()">Kembali ke Login</button>
+  </form>
+</div>
+
+<script>
+  function showRegister() {
+    document.getElementById('login-form').classList.add('hidden');
+    document.getElementById('register-form').classList.remove('hidden');
+  }
+
+  function showLogin() {
+    document.getElementById('register-form').classList.add('hidden');
+    document.getElementById('login-form').classList.remove('hidden');
+  }
+
+  function handleLogin() {
+    alert("Login berhasil! (simulasi)");
+    window.location.href = "index.html";
+    return false;
+  }
+
+  function handleRegister() {
+    const form = document.forms[1];
+    const password = form.password.value;
+    const confirmPassword = form.confirmPassword.value;
+
+    if (password !== confirmPassword) {
+      alert("Password tidak cocok, silakan periksa kembali.");
+      return false;
+    }
+
+    alert("Registrasi berhasil! Silakan login.");
+    showLogin();
+    return false;
+  }
+
+  function togglePassword(inputId, toggleElement) {
+    const input = document.getElementById(inputId);
+    if (input.type === "password") {
+      input.type = "text";
+      toggleElement.textContent = "🙈"; // Jika terlihat
+    } else {
+      input.type = "password";
+      toggleElement.textContent = "👁️"; // Jika disembunyikan
+    }
+  }
+</script>
+
+</body>
+</html>
